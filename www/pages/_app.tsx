@@ -35,7 +35,10 @@ type ExtendedAppProps = AppProps & {
     Component: ExtendedNextPage;
 };
 
+console.log('app');
+
 const App = (props: React.PropsWithChildren) => {
+
     const { data: session, status } = useSession();
     const router = useRouter();
     const { to } = router.query;

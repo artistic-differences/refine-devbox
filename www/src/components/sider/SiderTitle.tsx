@@ -7,12 +7,8 @@ export const SiderTitle = ({collapsed}) => {
     if (!collapsed) {
         return (
             <>
-                <img
-                     style={{maxHeight:"40px"}}
-                     alt="Company logo"
-                     src={"/images/keyzo.png"}
-                />
-                <span style={{paddingLeft:"5px"}}>Saas</span>
+                <img/>
+                <span style={{paddingLeft:"5px"}}>Devbox</span>
             </>
         )
     } else {

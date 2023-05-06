@@ -1,7 +1,4 @@
-import NextAuth, { Awaitable, User, NextAuthOptions } from "next-auth";
-import GoogleProvider from "next-auth/providers/google";
-import Auth0Provider from "next-auth/providers/auth0";
-import KeycloakProvider from "next-auth/providers/keycloak";
+import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { JWT } from "next-auth/jwt";
 import * as jsonwebtoken from "jsonwebtoken";
@@ -9,29 +6,6 @@ import * as jsonwebtoken from "jsonwebtoken";
 export const authOptions: NextAuthOptions  = {
     // Configure one or more authentication providers
     providers: [
-        // !!! Should be stored in .env file.
-        GoogleProvider({
-            clientId: `1041339102270-e1fpe2b6v6u1didfndh7jkjmpcashs4f.apps.googleusercontent.com`,
-            clientSecret: `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`,
-        }),
-        Auth0Provider({
-            clientId: `Be5vsLunFvpzPf4xfXtaMxrZUVBjjNPO`,
-            clientSecret: `08F9X84FvzpsimV16CQvlQuwJOlqk-GqQgEdcq_3xzrn1K3UHnTCcRgMCwBW7api`,
-            issuer: `https://dev-qg1ftdys736bk5i3.us.auth0.com`,
-        }),
-        KeycloakProvider({
-            clientId: `refine-demo`,
-            clientSecret: `refine`,
-            issuer: `https://lemur-0.cloud-iam.com/auth/realms/refine`,
-            profile(profile) {
-                return {
-                    id: profile.sub,
-                    name: profile.name ?? profile.preferred_username,
-                    email: profile.email,
-                    image: `https://faces-img.xcdn.link/thumb-lorem-face-6312_thumb.jpg`,
-                };
-            },
-        }),
         CredentialsProvider({
             name: "Credentials",
             credentials: {},
@@ -41,34 +15,25 @@ export const authOptions: NextAuthOptions  = {
                     "credentials",
                     JSON.stringify(credentials, null, 2),
                 );
-                if (credentials.email==="sysadmin@keyzo.com") {
+                if (credentials?.email?.includes("admin")) {
                     return  {
                         id: "1",
-                        name: "Sys Admin",
-                        email: "sysadmin@keyzo.com",
+                        name: "Admin",
+                        email: credentials?.email,
                         image: "https://i.pravatar.cc/301",
                     }
                 }
 
                 return {
                     id: "2",
-                    name: "John Doe",
-                    email: "demo@refine.dev",
+                    name: "User",
+                    email: credentials?.email,
                     image: "https://i.pravatar.cc/300",
                 }
-
-
-                // const user: Awaitable<User> = {
-                //     id: "1",
-                //     name: "John Doe",
-                //     email: "demo@refine.dev",
-                //     image: "https://i.pravatar.cc/300",
-                // };
-                // return user;
             },
         }),
     ],
-    secret: `UItTuD1HcGXIj8ZfHUswhYdNd40Lc325R8VlxQPUoR0=`,
+    secret:  process.env["JWT_SECRET"],
 
     theme: {
         colorScheme: "auto",
@@ -99,7 +64,9 @@ export const authOptions: NextAuthOptions  = {
                 //query data to find out our additional claims and add them here.
                 //search based on user.email, profile.email or account.email
 
-                const role = user.email === "sysadmin@keyzo.com" ? "admin" : "user";
+                const role = user.email?.includes("admin") ? "admin" : "user";
+
+                console.log(role)
 
                 token.hasuraClaims = {
                     "https://hasura.io/jwt/claims": {
@@ -118,7 +85,7 @@ export const authOptions: NextAuthOptions  = {
             if (session?.user) {
                 session.user.id = token.sub!;
                 session.user.role = token.hasuraClaims["https://hasura.io/jwt/claims"]["x-hasura-role"];
-                const secret = `UItTuD1HcGXIj8ZfHUswhYdNd40Lc325R8VlxQPUoR0=`;
+                const secret = process.env["JWT_SECRET"]?.toString()
                 //add the encoded hasura claims into the session so we can use these on the client
                 //or server when making a request to hasura
                 session.encodedToken =  jsonwebtoken.sign(token.hasuraClaims, secret, {

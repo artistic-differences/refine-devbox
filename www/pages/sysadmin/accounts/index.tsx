@@ -12,6 +12,9 @@ import { Table, Space } from "antd";
 import {IAccount} from "../../../src/interfaces";
 
 export const AccountList: React.FC<IResourceComponentsProps> = () => {
+
+    console.log('Account Page');
+
     const { tableProps } = useTable<IAccount>({
         metaData: {
             fields: [

@@ -8,6 +8,10 @@
 - db.json JsonServer to bootstrap and protype quickly
 - Hasura
 
+Editors:
+- Quill Maths Editor https://github.com/vieyama/quill-editor-math/
+- https://reactjsexample.com/a-simple-react-js-markdown-editor-with-preview/
+- Markdown Edit https://github.com/uiwjs/react-md-editor
 ## Getting Started
 
 ```docker-compose up -d``` to launch hasura and postgres db
@@ -28,5 +32,14 @@ Encoded token is also added to the session object so that it can be added to the
 this is done in 
 - www/src/utils/hasuraClients
 
+Dynamic Resource
 
+{
+"name": "resource",
+"list": "/dynamic/:resource",
+"edit": "/dynamic/:resource/:id"
+"meta": {
+"roles": ["admin"]
+}
+},
 

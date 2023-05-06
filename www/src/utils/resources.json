@@ -1,0 +1,54 @@
+{
+  "resources":[
+    {
+      "name": "accounts",
+      "list": "/sysadmin/accounts",
+      "create": "/sysadmin/accounts/create",
+      "edit": "/sysadmin/accounts/edit/:id",
+      "meta": {
+        "roles": ["admin"]
+      }
+    },
+    {
+      "name": "Markdown",
+      "list": "/markdown",
+      "meta": {
+        "roles": ["admin"]
+      }
+    },
+    {
+      "name": "Database",
+      "list": "/database",
+      "meta": {
+        "roles": ["admin"]
+      }
+    },
+    {
+      "name": "Code",
+      "list": "/code",
+      "meta": {
+        "roles": ["admin"]
+      }
+    },
+    {
+      "name": "Posts",
+      "list": "/dynamic/posts",
+      "edit": "/dynamic/edit/posts/:id",
+      "show": "/dynamic/show/posts/:id",
+      "create": "/dynamic/create/posts",
+      "meta": {
+        "roles": ["admin"]
+      }
+    },
+    {
+      "name": "userAccount",
+
+      "list": "/account",
+      "meta": {
+        "label":"Account",
+
+        "roles": ["user"]
+      }
+    }
+  ]
+}

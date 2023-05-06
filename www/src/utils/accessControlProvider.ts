@@ -15,7 +15,7 @@ export const accessControlProvider = {
         const currentResource = resources.find(r=>r.name?.toLowerCase() === resource?.toLowerCase())
         const {role} = currentUser;
         return {
-            can : currentResource.meta.roles.includes(role)
+            can : true // currentResource?.meta.roles.includes(role)
         };
         // const enforcer = await newEnforcer(model, adapter);
         // if (

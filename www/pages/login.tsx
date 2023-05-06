@@ -5,21 +5,22 @@ import { ExtendedNextPage } from "./_app";
 const Login: ExtendedNextPage = () => {
     return (
         <AuthPage
+            title={"Devbox"}
             type="login"
-            providers={[
-                {
-                    name: "google",
-                    label: "with Google",
-                },
-                {
-                    name: "auth0",
-                    label: "with Auth0",
-                },
-                {
-                    name: "keycloak",
-                    label: "with Keycloak",
-                },
-            ]}
+            // providers={[
+            //     {
+            //         name: "google",
+            //         label: "with Google",
+            //     },
+            //     {
+            //         name: "auth0",
+            //         label: "with Auth0",
+            //     },
+            //     {
+            //         name: "keycloak",
+            //         label: "with Keycloak",
+            //     },
+            // ]}
             formProps={{
                 initialValues: {
                     email: "demo@refine.dev",

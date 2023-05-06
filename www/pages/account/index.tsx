@@ -21,7 +21,9 @@ export const AccountEdit: React.FC<IResourceComponentsProps> = () => {
 
     return (
         <>
+
         <Edit saveButtonProps={saveButtonProps} headerButtons={()=>(<></>)} >
+
             <Form {...formProps} layout="vertical">
                 <Form.Item
                     label="Organisation Name"
