@@ -17,20 +17,6 @@
       }
     },
     {
-      "name": "Database",
-      "list": "/database",
-      "meta": {
-        "roles": ["admin"]
-      }
-    },
-    {
-      "name": "Code",
-      "list": "/code",
-      "meta": {
-        "roles": ["admin"]
-      }
-    },
-    {
       "name": "Posts",
       "list": "/dynamic/posts",
       "edit": "/dynamic/edit/posts/:id",
